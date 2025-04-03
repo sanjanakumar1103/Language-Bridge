@@ -12,7 +12,6 @@ if os.name == "nt":  # Windows
 else:  # Linux (Streamlit Cloud)
     pytesseract.pytesseract.tesseract_cmd = "/usr/bin/tesseract"
 
-
 # Database Setup
 def init_db():
     conn = sqlite3.connect("users.db")
@@ -66,30 +65,6 @@ st.set_page_config(page_title="Language Bridge", layout="wide")
 # Sidebar navigation
 st.sidebar.title("Navigation")
 page = st.sidebar.radio("Go to", ["Home", "Login", "Register", "Translate"])
-
-# Colors & Styling
-st.markdown(
-    """
-    <style>
-        body {background-color: #e0f7fa;}  
-        .stTextInput, .stButton, .stSelectbox {border-radius: 10px; border: 2px solid #004d40;} 
-        .css-18e3th9 {padding: 20px;}  
-        .css-1d391kg {background-color: #80deea; border-radius: 10px;}  
-        h1, h2, h3 {color: #004d40;}  
-        .stButton>button {background-color: #004d40; color: white; border-radius: 8px;} 
-        .stButton>button:hover {background-color: #00796b;}  
-        .stTextInput>div>input {border: 2px solid #00796b; border-radius: 8px; padding: 10px;}  
-        .stTextInput>div>label {color: #00796b;}  
-        .stTextArea>textarea {border: 2px solid #00796b; border-radius: 8px; padding: 10px;}  
-        .stRadio {padding: 0;}  
-        .stRadio, .stButton, .stTextInput, .stSelectbox, .stTextArea {
-            box-shadow: none;
-            border-width: 0 !important;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
 
 # Home Page
 if page == "Home":
@@ -172,8 +147,9 @@ elif page == "Translate":
                     st.write(f"**Translated Text:** {record[1]}")
         else:
             st.write("No translations found in your history.")
-           # Admin Panel: Display Users and Translation History
-st.sidebar.title("Admin Panel")  # This adds a new section in the sidebar
+
+# Admin Panel: Display Users and Translation History
+st.sidebar.title("Admin Panel")
 
 if st.sidebar.button("Show Users"):
     conn = sqlite3.connect("users.db")
@@ -200,5 +176,3 @@ if st.sidebar.button("Show Translation History"):
         st.table(history)
     else:
         st.write("No history found.")
-
-
