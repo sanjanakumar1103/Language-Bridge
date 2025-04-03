@@ -1,0 +1,7 @@
+streamlit
+bcrypt
+deep-translator
+pdf2image
+pytesseract
+pillow
+sqlite3
