@@ -172,3 +172,41 @@ elif page == "Translate":
                     st.write(f"**Translated Text:** {record[1]}")
         else:
             st.write("No translations found in your history.")
+            # Add this after the Translate page logic, around line 160+
+
+# Functions to retrieve data from the database
+def show_users():
+    conn = sqlite3.connect("users.db")
+    c = conn.cursor()
+    c.execute("SELECT * FROM users")
+    users = c.fetchall()
+    conn.close()
+    return users
+
+def show_translation_history():
+    conn = sqlite3.connect("users.db")
+    c = conn.cursor()
+    c.execute("SELECT * FROM translation_history")
+    history = c.fetchall()
+    conn.close()
+    return history
+
+# Sidebar buttons to show database contents
+st.sidebar.title("Admin Panel")  # Add a title for better organization
+
+if st.sidebar.button("Show Users"):
+    users = show_users()
+    if users:
+        st.write("### Registered Users")
+        st.table(users)
+    else:
+        st.write("No users found.")
+
+if st.sidebar.button("Show Translation History"):
+    history = show_translation_history()
+    if history:
+        st.write("### Translation History")
+        st.table(history)
+    else:
+        st.write("No history found.")
+
