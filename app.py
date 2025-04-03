@@ -92,7 +92,7 @@ elif page == "Login":
             st.success("Login successful!")
             st.session_state["logged_in"] = True
             st.session_state["username"] = username  # Store the username in session state
-            st.experimental_rerun()  # Refresh the page to update session state
+            st.rerun()  # Refresh the page to update session state
         else:
             st.error("Invalid credentials")
 
