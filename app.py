@@ -1,13 +1,17 @@
+import os
 import streamlit as st
-from PIL import Image
 import pytesseract
+from PIL import Image
 from pdf2image import convert_from_bytes
-from io import BytesIO
 from deep_translator import GoogleTranslator
 import sqlite3
 
-# Set the path to Tesseract-OCR (Update this path if necessary)
-pytesseract.pytesseract.tesseract_cmd = r'C:\Users\kaavi\Music\code\Tesseract-OCR\tesseract.exe'
+# Detect OS and set Tesseract path accordingly
+if os.name == "nt":  # Windows
+    pytesseract.pytesseract.tesseract_cmd = r'C:\Users\kaavi\Music\code\Tesseract-OCR\tesseract.exe'
+else:  # Linux (Streamlit Cloud)
+    pytesseract.pytesseract.tesseract_cmd = "/usr/bin/tesseract"
+
 
 # Database Setup
 def init_db():
